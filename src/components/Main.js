@@ -1,18 +1,16 @@
-// import './App.css';
+import React from "react";
 
-function App() {
-  return (
-    <>
-    <main id="main_container">
-     <title>Around The U.S.</title>
-        <header className="header">
-          <img className="header__vector" src="./images/header-vector.svg" alt="around the US icon" />
-        </header>
+
+function Main(){
+  return(
+     <main id = "main_container" >
           <section className="profile">
+
             <div className="profile__img-place">
               <img id="avatar" className="profile__avatar" src="./images/profile-avatar.jpg" alt="profile picture" />
               <div className="profile__edit-overlay" />
             </div>
+
             <div className="profile__info">
               <div className="profile__details-container">
                 <div className="profile__text-box">
@@ -26,10 +24,12 @@ function App() {
               </button>
             </div>
           </section>
+
           <section className="elements">
             <ul className="elements__list">
             </ul>
           </section>
+
           <div className="popup form-container" id="form_popup">
             <div className="popup__container">
               <form className="form" name="edit_profile_form">
@@ -45,6 +45,7 @@ function App() {
               </form>
             </div>
           </div>
+
           <div className="popup add-container " id="add_popup">
             <div className="popup__container">
               <form className="form" name="add_place_form">
@@ -60,6 +61,7 @@ function App() {
               </form>
             </div>
           </div>
+
           <div className="popup delete-container" id="delete_popup">
             <div className="popup__container">
               <form name="delete" className="form" noValidate>
@@ -71,6 +73,7 @@ function App() {
               </form>
             </div>
           </div>
+
           <div className="popup photo-container " id="photo_popup">
             <div className="popup__container-image">
               <button className="popup__img-close-btn" type="button" aria-label="close photo addition form">
@@ -80,6 +83,7 @@ function App() {
               <h2 className="popup__photo-title">Yosemite Valley</h2>
             </div>
           </div>
+
           <div className="popup avatar-container">
             <div className="popup__container">
               <form name="avatar" className="form" noValidate>
@@ -93,13 +97,10 @@ function App() {
               </form>
             </div>
           </div>
+          
           <template id="element-template" />
         </main>
-          <footer className="footer">
-          <p className="footer__copyright">© 2021 Seaf Aliyan</p>
-        </footer>
-        </>
-  );
+  )
 }
 
-export default App;
+export default Main
