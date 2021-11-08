@@ -1,7 +1,7 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm"
 import closingButtonImage from "../images/profile-add-icon.svg"
-import PopupWithImage from "./PopupWithImage";
+import ImagePopup from "./ImagePopup";
 import api from "../utils/api";
 import Card from "./Card";
 
@@ -97,7 +97,7 @@ function Main(props) {
         <button type="submit" aria-label="submit avatar changes" className="form__submit-btn" id="form__avatar-submit-button">Save</button>
       </PopupWithForm>
 
-      <PopupWithImage onClose={props.onClose} card={props.selectedCard} handleCardClick={props.handleCardClick}/>
+      <ImagePopup  onClose={props.onClose} card={props.selectedCard} handleCardClick={props.handleCardClick}/>
 
       <section  className = "elements" >
         <ul className = "elements__list" >

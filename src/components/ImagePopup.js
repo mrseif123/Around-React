@@ -1,7 +1,7 @@
 import React from "react";
 import closeButton from "../images/profile-add-icon.svg"
 
-function PopupWithImage(props) {
+function ImagePopup (props) {
   return (
     <>
       <section className={"popup popup_type_image" +  (props.card ? " popup_visible" : "")}>
@@ -17,4 +17,4 @@ function PopupWithImage(props) {
   )
 }
 
-export default PopupWithImage;
+export default ImagePopup ;
