@@ -7,7 +7,7 @@ function Main(){
           <section className="profile">
 
             <div className="profile__img-place">
-              <img id="avatar" className="profile__avatar" src="./images/profile-avatar.jpg" alt="profile picture" />
+              <img id="avatar" className="profile__avatar" src="./images/profile-avatar.jpg" alt="profile" />
               <div className="profile__edit-overlay" />
             </div>
 
@@ -79,7 +79,7 @@ function Main(){
               <button className="popup__img-close-btn" type="button" aria-label="close photo addition form">
                 <img className="popup__close-img" src="./images/profile-add-icon.svg" alt="close button" />
               </button>
-              <img className="popup__place-image" src="./images/grid-img-1.png" alt="empty photo" />
+              <img className="popup__place-image" src="./images/grid-img-1.png" alt="empty" />
               <h2 className="popup__photo-title">Yosemite Valley</h2>
             </div>
           </div>
