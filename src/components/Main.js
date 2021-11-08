@@ -97,7 +97,7 @@ function Main(props) {
         <button type="submit" aria-label="submit avatar changes" className="form__submit-btn" id="form__avatar-submit-button">Save</button>
       </PopupWithForm>
 
-      <PopupWithImage onClose={props.onClose} card={props.selectedCard}/>
+      <PopupWithImage onClose={props.onClose} card={props.selectedCard} handleCardClick={props.handleCardClick}/>
 
       <section  className = "elements" >
         <ul className = "elements__list" >
@@ -109,8 +109,6 @@ function Main(props) {
         </ul>
       </section>
 
-
-      <template id="element-template" />
     </main>
   )
 }
