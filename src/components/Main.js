@@ -2,6 +2,7 @@ import React from "react";
 import PopupWithForm from "./PopupWithForm"
 import closingButtonImage from "../images/profile-add-icon.svg"
 import tmpAvatarImage from "../images/profile-avatar.jpg"
+import PopupWithImage from "./PopupWithImage";
 
  function handleEditAvatarClick() {
    document
@@ -92,15 +93,7 @@ function Main(props){
           </PopupWithForm>
 
 
-          <div className="popup photo-container" id="photo_popup">
-            <div className="popup__container-image">
-              <button className="popup__img-close-btn" type="button" aria-label="close photo addition form">
-                <img className="popup__close-img" src={closingButtonImage} alt="close button" />
-              </button>
-              <img className="popup__place-image" src="../src/images/grid-img-1.png" alt="empty" />
-              <h2 className="popup__photo-title">Yosemite Valley</h2>
-            </div>
-          </div>
+          <PopupWithImage/>
 
           
           <template id="element-template" />
