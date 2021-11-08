@@ -4,7 +4,6 @@ import closingButtonImage from "../images/profile-add-icon.svg"
 import PopupWithImage from "./PopupWithImage";
 import api from "../utils/api";
 import Card from "./Card";
-import { initialCards } from "../utils/initial-cards";
 
 function Main(props) {
 
@@ -59,9 +58,6 @@ function Main(props) {
         </div>
       </section>
 
-
-
-
       <PopupWithForm name="form" title="Edit Profile" isOpen={props.isEditProfilePopupOpen} >
         <button type="button" aria-label="close profile editing form" className="form__close-btn" id="close_button_profile" onClick={props.onClose}>
           <img className="form__close-img" src={closingButtonImage} alt="close button"  />
@@ -84,7 +80,6 @@ function Main(props) {
         <button type="submit" aria-label="submit profile changes" className="form__submit-btn" id="form__profile-submit-button">Save</button>
       </PopupWithForm>
 
-
       <PopupWithForm name="delete" title="Are you sure?" isOpen={false} >
         <button type="button" aria-label="close profile deletion form" className="form__close-btn" id="close_button_delete">
           <img className="form__close-img" src={closingButtonImage} alt="close button" onClick={props.onClose}/>
@@ -92,7 +87,6 @@ function Main(props) {
         <h2 className="form__title">Are you sure?</h2>
         <button type="submit" aria-label="submit profile changes" className="form__submit-btn" id="form__delete-submit-button">Yes</button>
       </PopupWithForm>
-
 
       <PopupWithForm name="avatar" title="Change profile picture" isOpen={props.isEditAvatarPopupOpen}>
         <button type="button" aria-label="close profile avatar form" className="form__close-btn" id="close_button_avatar">
@@ -102,7 +96,6 @@ function Main(props) {
         <span className="form__field-error link2-error" />
         <button type="submit" aria-label="submit avatar changes" className="form__submit-btn" id="form__avatar-submit-button">Save</button>
       </PopupWithForm>
-
 
       <PopupWithImage onClose={props.onClose} card={props.selectedCard}/>
 
