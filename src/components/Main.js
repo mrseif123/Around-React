@@ -3,23 +3,42 @@ import PopupWithForm from "./PopupWithForm"
 import closingButtonImage from "../images/profile-add-icon.svg"
 import tmpAvatarImage from "../images/profile-avatar.jpg"
 import PopupWithImage from "./PopupWithImage";
+import api from "../utils/api";
 
 
 function Main(props) {
+
+  const [userName, setUserName] = React.useState('');
+  const [userDescription, setUserDescription] = React.useState('');
+  const [userAvatar, setUserAvatar] = React.useState('');
+
+  React.useEffect(() => {
+    api
+      .getUserInfo()
+      .then((res) => {
+        setUserName(res.name);
+        setUserDescription(res.about);
+        setUserAvatar(res.avatar);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+
   return (
     <main id="main_container" >
       <section className="profile">
 
         <div className="profile__img-place">
-          <img id="avatar" className="profile__avatar" src={tmpAvatarImage} alt="profile" />
+          <img id="avatar" className="profile__avatar" src={userAvatar} alt="profile" />
           <div className="profile__edit-overlay" onClick={props.onEditAvatar} />
         </div>
 
         <div className="profile__info">
           <div className="profile__details-container">
             <div className="profile__text-box">
-              <h1 className="profile__name">Jacques cousteau</h1>
-              <p className="profile__subtitle">Explorer</p>
+              <h1 className="profile__name">{userName}</h1>
+              <p className="profile__subtitle">{userDescription}</p>
             </div>
             <button type="button" aria-label="edit profile" className="profile__edit-btn" onClick={props.onEditProfile} id="profile_edit_button">
             </button>
