@@ -3,16 +3,14 @@ import React from "react";
 function PopupWithImage(props) {
   return (
     <>
-      <section>
-        <div className="popup photo-container" id="photo_popup">
-          <div className="popup__container-image">
+      <section className={"popup popup_type_image" +  (props.card ? " popup_visible" : "")}>
+          <div className = "popup__container-image" id = "photo_popup" >
             <button className="popup__img-close-btn" type="button" aria-label="close photo addition form" onClick={props.onClose}>
-              <img className="popup__close-img" src={"../images/profile-add-icon.svg"} alt="close button" />
+              <img className="popup__close-img"  />
             </button>
-            <img className="popup__place-image" src="#" alt="" />
-            <h2 className="popup__photo-title">Yosemite Valley</h2>
+            <img className="popup__place-image" src={props.card ? props.card.link : "#"} alt={props.card ? props.card.name : ""}/>
+            <h2 className="popup__photo-title">{props.card ? props.card.name : ""}</h2>
           </div>
-        </div>
       </section>
   </>
   )

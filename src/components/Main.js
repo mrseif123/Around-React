@@ -1,16 +1,17 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm"
 import closingButtonImage from "../images/profile-add-icon.svg"
-import tmpAvatarImage from "../images/profile-avatar.jpg"
 import PopupWithImage from "./PopupWithImage";
 import api from "../utils/api";
-
+import Card from "./Card";
+import { initialCards } from "../utils/initial-cards";
 
 function Main(props) {
 
   const [userName, setUserName] = React.useState('');
   const [userDescription, setUserDescription] = React.useState('');
   const [userAvatar, setUserAvatar] = React.useState('');
+  const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
     api
@@ -24,6 +25,16 @@ function Main(props) {
         console.log(err);
       });
   });
+
+    React.useEffect(() => {
+    api.getGroupCards()
+      .then((data) => {
+        setCards((cards) => [...cards, ...data]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <main id="main_container" >
@@ -48,10 +59,7 @@ function Main(props) {
         </div>
       </section>
 
-      <section className="elements">
-        <ul className="elements__list">
-        </ul>
-      </section>
+
 
 
       <PopupWithForm name="form" title="Edit Profile" isOpen={props.isEditProfilePopupOpen} >
@@ -96,7 +104,17 @@ function Main(props) {
       </PopupWithForm>
 
 
-      <PopupWithImage onClick={props.onClose}/>
+      <PopupWithImage onClose={props.onClose} card={props.selectedCard}/>
+
+      <section  className = "elements" >
+        <ul className = "elements__list" >
+          {cards.map((card) => (
+            <Card key={card._id} 
+            card={card} 
+            onCardClick={props.onCardClick} />
+          ))}
+        </ul>
+      </section>
 
 
       <template id="element-template" />
