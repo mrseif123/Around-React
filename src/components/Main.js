@@ -4,22 +4,6 @@ import closingButtonImage from "../images/profile-add-icon.svg"
 import tmpAvatarImage from "../images/profile-avatar.jpg"
 import PopupWithImage from "./PopupWithImage";
 
-//  function handleEditAvatarClick() {
-//    document
-//      .querySelector('.popup_type_avatar')
-//      .classList.add('popup_visible');
-//  }
-
-//  function handleEditProfileClick() {
-//    document
-//      .querySelector('.popup_type_form')
-//      .classList.add("popup_visible");
-//  }
-
-//  function handleAddPlaceClick() {
-//    document.querySelector('.popup_type_add')
-//      .classList.add("popup_visible");
-//  }
 
 function Main(props) {
   return (
@@ -52,8 +36,8 @@ function Main(props) {
 
 
       <PopupWithForm name="form" title="Edit Profile" isOpen={props.isEditProfilePopupOpen} >
-        <button type="button" aria-label="close profile editing form" className="form__close-btn" id="close_button_profile">
-          <img className="form__close-img" src={closingButtonImage} alt="close button" />
+        <button type="button" aria-label="close profile editing form" className="form__close-btn" id="close_button_profile" onClick={props.onClose}>
+          <img className="form__close-img" src={closingButtonImage} alt="close button"  />
         </button>
         <input className="form__field form__field_name" type="text" name="name" id="fullName" placeholder="Full Name" required minLength={2} maxLength={40} />
         <span className="form__field-error fullName-error" />
@@ -64,7 +48,7 @@ function Main(props) {
 
       <PopupWithForm name="add" title="New Place" isOpen={props.isAddPlacePopupOpen}>
         <button type="button" aria-label="close place addition form" className="form__close-btn" id="close_button_add">
-          <img className="form__close-img" src={closingButtonImage} alt="close button" />
+          <img className="form__close-img" src={closingButtonImage} alt="close button" onClick={props.onClose}/>
         </button>
         <input className="form__field form__field_title" type="text" name="name" id="title" placeholder="Title" required minLength={1} maxLength={30} />
         <span className="form__field-error title-error" />
@@ -74,18 +58,18 @@ function Main(props) {
       </PopupWithForm>
 
 
-      <PopupWithForm name="delete" title="Are you sure?" isOpen={false}>
+      <PopupWithForm name="delete" title="Are you sure?" isOpen={false} >
         <button type="button" aria-label="close profile deletion form" className="form__close-btn" id="close_button_delete">
-          <img className="form__close-img" src={closingButtonImage} alt="close button" />
+          <img className="form__close-img" src={closingButtonImage} alt="close button" onClick={props.onClose}/>
         </button>
         <h2 className="form__title">Are you sure?</h2>
         <button type="submit" aria-label="submit profile changes" className="form__submit-btn" id="form__delete-submit-button">Yes</button>
       </PopupWithForm>
 
 
-      <PopupWithForm name="avatar" title="Change profile picture" isOpen={props.isEditAvatarPopupOpen} >
+      <PopupWithForm name="avatar" title="Change profile picture" isOpen={props.isEditAvatarPopupOpen}>
         <button type="button" aria-label="close profile avatar form" className="form__close-btn" id="close_button_avatar">
-          <img className="form__close-img" src={closingButtonImage} alt="close button" />
+          <img className="form__close-img" src={closingButtonImage} alt="close button" onClick={props.onClose}/>
         </button>
         <input className="form__field form__field_link" type="url" name="link" id="link2" placeholder="Image link" required />
         <span className="form__field-error link2-error" />
@@ -93,7 +77,7 @@ function Main(props) {
       </PopupWithForm>
 
 
-      <PopupWithImage />
+      <PopupWithImage onClick={props.onClose}/>
 
 
       <template id="element-template" />

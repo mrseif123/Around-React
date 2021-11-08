@@ -19,13 +19,19 @@ function App() {
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
   }
+  function closeAllPopups(){
+    setIsAddPlacePopupOpen(false)
+    setIsEditAvatarPopupOpen(false)
+    setIsEditProfilePopupOpen(false)
+  }
 
   return (
     <>
         <Header />
         <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick}
          onEditAvatar={handleEditAvatarClick} isEditAvatarPopupOpen={isEditAvatarPopupOpen}
-          isAddPlacePopupOpen={isAddPlacePopupOpen} isEditProfilePopupOpen={isEditProfilePopupOpen} />
+          isAddPlacePopupOpen={isAddPlacePopupOpen} isEditProfilePopupOpen={isEditProfilePopupOpen} 
+          onClose={closeAllPopups} />
         <Footer/>
     </>
   );
