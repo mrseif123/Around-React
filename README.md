@@ -1,8 +1,6 @@
 # [Projects 10: Around React](https://mrseif123.github.io/Web-Project-4-9)
 
-## Overview
-
-### Porting previous projects 4 through 9 to React!
+## Porting previous projects 4 through 9 to React!
 #### While no new functionality was added to previous projects, this project focused on the following:
 * React syntax.
 * JSX.
