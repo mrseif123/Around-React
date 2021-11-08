@@ -1,4 +1,4 @@
-# [Projects 10: Around React](https://mrseif123.github.io/Web-Project-4-9)
+# [Projects 10: Around React](??)
 
 ## Porting previous projects 4 through 9 to React!
 #### This project focused on the following technologies:
@@ -20,4 +20,4 @@
 * Basic animations.
 * Figma design.
 
-[A direct link (GitHub Pages)](https://mrseif123.github.io/Web-Project-4-9)
+[A direct link (GitHub Pages)](??)
