@@ -8,6 +8,7 @@ import api from '../utils/api';
 import { CurrentUserContext } from "../contexts/CurrentUserContext"
 import EditAvatarPopup from './EditAvatarPopup';
 import EditProfilePopup from './EditProfilePopup';
+import AddPlacePopup from './AddPlacePopup';
 
 
 function App() {
@@ -16,6 +17,8 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isDeletePopupOpen, setIsDeletePopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(null);
+  const [currentUser, setCurrentUser] = React.useState({});
+  const [cards, setCards] = React.useState([])
 
 
   function handleEditProfileClick() {
@@ -34,7 +37,6 @@ function App() {
     setSelectedCard(card);
   }
 
-
   function closeAllPopups() {
     setIsAddPlacePopupOpen(false)
     setIsEditAvatarPopupOpen(false)
@@ -43,7 +45,6 @@ function App() {
     setSelectedCard(null);
   }
 
-  const [currentUser, setCurrentUser] = React.useState({});
   React.useEffect(() => {
     api
       .getUserInfo()
@@ -67,14 +68,24 @@ function App() {
       });
   }
 
-  function handleUpdateAvatar(data) {
-    // console.log(data, data.link)
+  function handleUpdateAvatar({ avatar }) {
     api
-      .updateAvatar(data.avatar)
-      .then(() => {
-        setCurrentUser(data.avatar);
+      .updateAvatar(avatar)
+      .then((updateProfile) => {
+        setCurrentUser(updateProfile);
         setIsEditAvatarPopupOpen(false)
       })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function handleAddPlace(data) {
+    api.
+    addCard(data).then((newCard) => {
+      setCards([newCard, ...cards]);
+      closeAllPopups();
+    })
       .catch((err) => {
         console.log(err);
       });
@@ -88,14 +99,9 @@ function App() {
 
       <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
 
-      <PopupWithForm name="add" title="New Place" isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
-        <input className="form__field form__field_title" type="text" name="name" id="title" placeholder="Title" required minLength={1} maxLength={30} />
-        <span className="form__field-error title-error" />
-        <input className="form__field form__field_link" type="url" name="link" id="link" placeholder="Image link" required />
-        <span className="form__field-error link-error" />
-      </PopupWithForm>
+      <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlace} />
 
-      <PopupWithForm name="delete" title="Are you sure?" isOpen={isDeletePopupOpen} onClose={closeAllPopups} />
+      <PopupWithForm name="delete" title="Are you sure?" isOpen={isDeletePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlace} />
 
       <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
 

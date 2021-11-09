@@ -1,5 +1,5 @@
 class Api {
-     constructor({
+  constructor({
     baseUrl,
     authorization
   }) {
@@ -8,10 +8,10 @@ class Api {
   }
 
   _checkResponse(res) {
-      if (!res.ok) {
-        return Promise.reject(`${res.status} error!`);
-      }
-      return res.json();
+    if (!res.ok) {
+      return Promise.reject(`${res.status} error!`);
+    }
+    return res.json();
   }
 
   async getUserInfo() {

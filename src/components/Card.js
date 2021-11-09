@@ -32,7 +32,7 @@ function Card(props) {
   function handleCardDelete(e) {
     e.stopPropagation();
     e.preventDefault();
-    props.onCardDelete(props.card);
+    props.onDeleteClick(props.card);
   }
 
   return (
