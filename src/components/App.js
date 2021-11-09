@@ -6,6 +6,8 @@ import Main from './Main';
 import Footer from './Footer';
 import api from '../utils/api';
 import { CurrentUserContext } from "../contexts/CurrentUserContext"
+import EditAvatarPopup from './EditAvatarPopup';
+import EditProfilePopup from './EditProfilePopup';
 
 
 function App() {
@@ -14,7 +16,7 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isDeletePopupOpen, setIsDeletePopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(null);
-  
+
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
@@ -32,7 +34,8 @@ function App() {
     setSelectedCard(card);
   }
 
-  function closeAllPopups(){
+
+  function closeAllPopups() {
     setIsAddPlacePopupOpen(false)
     setIsEditAvatarPopupOpen(false)
     setIsEditProfilePopupOpen(false)
@@ -41,40 +44,49 @@ function App() {
   }
 
   const [currentUser, setCurrentUser] = React.useState({});
-    React.useEffect(() => {
-      api
-        .getUserInfo()
-        .then((userProfile) => {
-          setCurrentUser(userProfile);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }, []);
+  React.useEffect(() => {
+    api
+      .getUserInfo()
+      .then((userProfile) => {
+        setCurrentUser(userProfile);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
-  // React.useEffect(() => {
-  //   api
-  //     .getUserInfo()
-  //     .then((userProfile) => {
-  //       setCurrentUser(userProfile);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
+  function handleUpdateUser(data) {
+    api
+      .updateProfile(data)
+      .then((res) => {
+        setCurrentUser(res);
+        setIsEditProfilePopupOpen(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function handleUpdateAvatar(data) {
+    // console.log(data, data.link)
+    api
+      .updateAvatar(data.avatar)
+      .then(() => {
+        setCurrentUser(data.avatar);
+        setIsEditAvatarPopupOpen(false)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   return (
-    <CurrentUserContext.Provider value= {currentUser}>
+    <CurrentUserContext.Provider value={currentUser}>
       <Header />
       <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick}
-         onEditAvatar={handleEditAvatarClick} onDeleteClick={handleDeleteClick} onCardClick={handleCardClick}/>
+        onEditAvatar={handleEditAvatarClick} onDeleteClick={handleDeleteClick} onCardClick={handleCardClick} />
 
-      <PopupWithForm name="form" title="Edit Profile" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} >
-        <input className="form__field form__field_name" type="text" name="name" id="fullName" placeholder="Full Name" required minLength={2} maxLength={40} />
-        <span className="form__field-error fullName-error" />
-        <input className="form__field form__field_about" type="text" name="about" id="about" placeholder="About" required minLength={2} maxLength={200} />
-        <span className="form__field-error about-error" />
-      </PopupWithForm>
+      <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
 
       <PopupWithForm name="add" title="New Place" isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
         <input className="form__field form__field_title" type="text" name="name" id="title" placeholder="Title" required minLength={1} maxLength={30} />
@@ -83,17 +95,14 @@ function App() {
         <span className="form__field-error link-error" />
       </PopupWithForm>
 
-      <PopupWithForm name="delete" title="Are you sure?" isOpen={isDeletePopupOpen} onClose={closeAllPopups}/>
+      <PopupWithForm name="delete" title="Are you sure?" isOpen={isDeletePopupOpen} onClose={closeAllPopups} />
 
-      <PopupWithForm name="avatar" title="Change profile picture" isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}>
-        <input className="form__field form__field_link" type="url" name="link" id="link2" placeholder="Image link" required />
-        <span className="form__field-error link2-error" />
-      </PopupWithForm>
+      <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
 
-      <ImagePopup onClose={closeAllPopups} card={selectedCard} handleCardClick={handleCardClick}/>
+      <ImagePopup onClose={closeAllPopups} card={selectedCard} handleCardClick={handleCardClick} />
 
-      <Footer/>
-    </CurrentUserContext.Provider>  
+      <Footer />
+    </CurrentUserContext.Provider>
   );
 }
 

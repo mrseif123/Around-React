@@ -3,7 +3,7 @@ import closingButtonImage from "../images/profile-add-icon.svg"
 
 function PopupWithForm(props){
   return (
-    <section className={`popup popup_type_${props.name} ${props.isOpen ? "popup_visible" : "" }`}>
+    <section className={`popup popup_type_${props.name} ${props.isOpen ? "popup_visible" : "" }`} onSubmit={props.onSubmit}>
       <div className = "popup__container" >
         <form className = "form" name={`form__${props.name}`} action="#">
           <button type="button" aria-label="close form" className="form__close-btn"
