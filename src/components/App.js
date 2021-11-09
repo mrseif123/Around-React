@@ -4,6 +4,8 @@ import ImagePopup from "./ImagePopup";
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
+import api from '../utils/api';
+import { CurrentUserContext } from "../contexts/CurrentUserContext"
 
 
 function App() {
@@ -38,8 +40,31 @@ function App() {
     setSelectedCard(null);
   }
 
+  const [currentUser, setCurrentUser] = React.useState({});
+    React.useEffect(() => {
+      api
+        .getUserInfo()
+        .then((userProfile) => {
+          setCurrentUser(userProfile);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }, []);
+
+  // React.useEffect(() => {
+  //   api
+  //     .getUserInfo()
+  //     .then((userProfile) => {
+  //       setCurrentUser(userProfile);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
+
   return (
-    <>
+    <CurrentUserContext.Provider value= {currentUser}>
       <Header />
       <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick}
          onEditAvatar={handleEditAvatarClick} onDeleteClick={handleDeleteClick} onCardClick={handleCardClick}/>
@@ -68,7 +93,7 @@ function App() {
       <ImagePopup onClose={closeAllPopups} card={selectedCard} handleCardClick={handleCardClick}/>
 
       <Footer/>
-    </>
+    </CurrentUserContext.Provider>  
   );
 }
 
