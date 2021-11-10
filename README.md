@@ -1,4 +1,4 @@
-# [Projects 10: Around React](??)
+# [Projects 10 & 11: Around React](??)
 
 ## Porting previous projects 4 through 9 to React!
 #### This project focused on the following technologies:
