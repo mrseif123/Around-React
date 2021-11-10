@@ -16,6 +16,7 @@ function AddPlacePopup(props) {
   function handleSubmit(e) {
     e.preventDefault()
     props.onAddPlace({ name, link })
+    document.getElementById("popup_add").reset();
   }
 
   return (
